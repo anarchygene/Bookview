@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_home"
+        android:onClick="onClick"
+        android:title="@string/menu_label_1"
+        android:icon="@drawable/homeicon" />
+    <item android:id="@+id/action_about"
+        android:onClick="onClick"
+        android:title="@string/menu_label_2"
+        android:icon="@drawable/aboutusicon" />
+    <item android:id="@+id/action_feedback"
+        android:title="@string/menu_label_3"
+        android:icon="@drawable/feedbackicon" />
+    <item android:id="@+id/action_search"
+        android:title="@string/menu_label_4"
+        android:icon="@drawable/searchicon" />
+    <item android:id="@+id/action_profile"
+        android:onClick="onClick"
+        android:title="@string/menu_label_5"
+        android:icon="@drawable/avatar" />
+</menu>

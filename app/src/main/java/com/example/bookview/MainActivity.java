@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,6 +30,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
+    }
+
+    public void onClick(MenuItem item) {
+        Intent i;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                break;
+//            case R.id.action_about:
+//                i = new Intent(this, AboutUs.class);
+//                startActivity(i);
+//                break;
+////            case R.id.action_feedback:
+////                i = new Intent(this, Feedback.class);
+////                startActivity(i);
+////                break;
+//            case R.id.action_search:
+//                i = new Intent(this, Search.class);
+//                startActivity(i);
+//                break;
+//            case R.id.action_profile:
+//                i = new Intent(this, ProfileActivity.class);
+//                startActivity(i);
+//                break;
+        }
     }
 
 
