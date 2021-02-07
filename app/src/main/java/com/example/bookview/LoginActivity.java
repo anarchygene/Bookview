@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +19,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-    DatabaseReference reference;
+    DatabaseReference reference, bookreference;
     FirebaseAuth auth;
     EditText emailinput, passwordinput;
     Button registerBtn, loginBtn;
     public User user;
+    public ArrayList<Book> booklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         user = (User)getIntent().getSerializableExtra("userInfo");
-        if(user == null) {
+        booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
+        if(user == null || booklist == null) {
             System.out.println("User is empty");
         } else {
-            System.out.println(user);
+            System.out.println("User: " + user);
+            System.out.println("Booklist: " + booklist);
         }
 
         auth = FirebaseAuth.getInstance();
@@ -47,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 i.putExtra("userInfo", user);
+                i.putExtra("bookInfo", (Serializable)booklist);
                 startActivity(i);
             }
         });
@@ -86,9 +93,32 @@ public class LoginActivity extends AppCompatActivity {
                                     String birthday = snapshot.child("birthday").getValue(String.class);
                                     ArrayList<String> genres = (ArrayList<String>)snapshot.child("genres").getValue();
                                     user = new User(email, username, birthday, genres);
-                                    Intent i = (new Intent(LoginActivity.this, MainActivity.class));
-                                    i.putExtra("userInfo", user);
-                                    startActivity(i);
+                                    booklist = new ArrayList<Book>();
+                                    bookreference = FirebaseDatabase.getInstance().getReference("books");
+                                    bookreference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            //System.out.println(snapshot.getChildrenCount());
+                                            for (DataSnapshot childsnapshot: snapshot.getChildren()) {
+                                                String author = childsnapshot.child("author").getValue(String.class);
+                                                String imageURI = childsnapshot.child("imageURI").getValue(String.class);
+                                                String title = childsnapshot.child("title").getValue(String.class);
+                                                int ratingNo = childsnapshot.child("ratingNo").getValue(int.class);
+                                                booklist.add(new Book(title, imageURI, author, ratingNo));
+                                            }
+                                            System.out.println(booklist);
+                                            Intent i = (new Intent(LoginActivity.this, MainActivity.class));
+                                            i.putExtra("userInfo", user);
+                                            i.putExtra("bookInfo", (Serializable)booklist);
+                                            startActivity(i);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Datasnapshot does not exist", Toast.LENGTH_SHORT).show();
                                 }

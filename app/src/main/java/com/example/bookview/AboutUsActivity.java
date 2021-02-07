@@ -3,34 +3,25 @@ package com.example.bookview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
-    FirebaseAuth auth;
+public class AboutUsActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    TextView profileUsername, profileEmail, profileBirthday, profileGenres;
-    String username, email, birthday, genresString;
-    ArrayList<String> genres;
     public User user;
     public ArrayList<Book> booklist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_about_us);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationView.getMenu().findItem(R.id.action_profile).setChecked(true);
+        bottomNavigationView.getMenu().findItem(R.id.action_about).setChecked(true);
 
         user = (User)getIntent().getSerializableExtra("userInfo");
         booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
@@ -41,28 +32,6 @@ public class ProfileActivity extends AppCompatActivity {
             System.out.println("Booklist: " + booklist);
         }
 
-        auth = FirebaseAuth.getInstance();
-        username = user.getUsername();
-        email = user.getEmail();
-        birthday = user.getBirthday();
-        genres = user.getGenres();
-        genresString = "";
-        for (int i = 0; i < genres.size(); i++) {
-            if(i == genres.size()) {
-                genresString += genres.get(i);
-            } else {
-                genresString += genres.get(i) + ", ";
-            }
-        }
-
-        profileUsername = findViewById(R.id.profileName);
-        profileEmail = findViewById(R.id.profileEmail);
-        profileBirthday = findViewById(R.id.profileBirthday);
-        profileGenres = findViewById(R.id.profileGenre);
-        profileUsername.setText(username);
-        profileEmail.setText(email);
-        profileBirthday.setText(birthday);
-        profileGenres.setText(genresString);
     }
 
     public void onClick(MenuItem item) {
@@ -80,10 +49,10 @@ public class ProfileActivity extends AppCompatActivity {
                 i.putExtra("bookInfo", (Serializable)booklist);
                 startActivity(i);
                 break;
-////            case R.id.action_feedback:
-////                i = new Intent(this, Feedback.class);
-////                startActivity(i);
-////                break;
+//            case R.id.action_feedback:
+//                i = new Intent(this, Feedback.class);
+//                startActivity(i);
+//                break;
 //            case R.id.action_search:
 //                i = new Intent(this, Search.class);
 //                startActivity(i);
@@ -97,15 +66,4 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick2(View v) {
-        switch (v.getId()) {
-            case R.id.profileLogOutBtn:
-                auth.signOut();
-                Intent i = new Intent(this, LoginActivity.class);
-                i.putExtra("userInfo", user);
-                i.putExtra("bookInfo", (Serializable)booklist);
-                startActivity(i);
-                break;
-        }
-    }
 }
