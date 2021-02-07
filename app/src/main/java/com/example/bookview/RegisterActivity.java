@@ -31,11 +31,19 @@ public class RegisterActivity extends AppCompatActivity {
     ArrayList<String> genres = new ArrayList<>();
     ProgressBar progressBar;
     Button registerBtn, cancelBtn;
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        user = (User)getIntent().getSerializableExtra("userInfo");
+        if(user == null) {
+            System.out.println("User is empty");
+        } else {
+            System.out.println(user);
+        }
 
         //Date picker
         etDate = findViewById(R.id.registerBirthdayInput);
@@ -96,7 +104,9 @@ public class RegisterActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                i.putExtra("userInfo", user);
+                startActivity(i);
             }
         });
 
@@ -133,8 +143,10 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
+                                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    i.putExtra("userInfo", user);
                                     Toast.makeText(getApplicationContext(), "Successful in registering", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    startActivity(i);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Failed register", Toast.LENGTH_SHORT).show();
                                 }

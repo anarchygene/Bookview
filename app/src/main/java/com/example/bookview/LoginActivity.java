@@ -32,13 +32,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        user = (User)getIntent().getSerializableExtra("userInfo");
+        if(user == null) {
+            System.out.println("User is empty");
+        } else {
+            System.out.println(user);
+        }
+
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         registerBtn = findViewById(R.id.btnRegister);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                i.putExtra("userInfo", user);
+                startActivity(i);
             }
         });
         loginBtn = findViewById(R.id.btnLogin);
@@ -67,16 +76,19 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Query getUserInfo = reference.orderByChild(auth.getCurrentUser().getUid());
+                        String pKey = auth.getCurrentUser().getUid();
+                        Query getUserInfo = reference.child(pKey);
                         getUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
-                                    String username = snapshot.child(auth.getCurrentUser().getUid()).child("username").getValue(String.class);
-                                    String birthday = snapshot.child(auth.getCurrentUser().getUid()).child("birthday").getValue(String.class);
-                                    ArrayList<String> genres = snapshot.child(auth.getCurrentUser().getUid()).child("genres").getValue(ArrayList.class);
+                                    String username = snapshot.child("username").getValue(String.class);
+                                    String birthday = snapshot.child("birthday").getValue(String.class);
+                                    ArrayList<String> genres = (ArrayList<String>)snapshot.child("genres").getValue();
                                     user = new User(email, username, birthday, genres);
-                                    System.out.println("Success");
+                                    Intent i = (new Intent(LoginActivity.this, MainActivity.class));
+                                    i.putExtra("userInfo", user);
+                                    startActivity(i);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Datasnapshot does not exist", Toast.LENGTH_SHORT).show();
                                 }
@@ -87,8 +99,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         });
-
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "Incorrect credentials", Toast.LENGTH_SHORT).show();
                     }

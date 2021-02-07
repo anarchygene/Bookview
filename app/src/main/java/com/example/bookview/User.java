@@ -1,8 +1,9 @@
 package com.example.bookview;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
     public String email, username, birthday;
     public ArrayList<String> genres;
 
