@@ -10,9 +10,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.net.URI;
@@ -40,7 +42,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         final Book b = data.get(position);
         holder.bookTitle.setText(b.getTitle());
-        holder.bookImage.setImageURI(new URI(b.getImageURI()));
+
+        String url = "gs://ande-da9e7.appspot.com/" + b.getImageURI().toString() + ".png";
+        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+
+        Glide.with(homeActivity)
+                .load(ref)
+                .into(holder.bookImage);
+
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
