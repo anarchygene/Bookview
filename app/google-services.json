@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "74951708414",
+    "firebase_url": "https://ande-da9e7-default-rtdb.firebaseio.com",
+    "project_id": "ande-da9e7",
+    "storage_bucket": "ande-da9e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74951708414:android:f83fc9f2587e6587235faf",
+        "android_client_info": {
+          "package_name": "com.example.bookview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74951708414-nhsfukqe5abmcguueh4hsdakl49rgjs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKbHIFGQSRJyz1fKKYgx1snqvOYpjIn9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74951708414-nhsfukqe5abmcguueh4hsdakl49rgjs8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

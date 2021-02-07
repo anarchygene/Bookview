@@ -1,3 +1,80 @@
-<resources>
-    <string name="app_name">Book View</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Booky Boi</string>
+    <string name="label1"><u>NON-FICTION</u></string>
+    <string name="wanttoread">Want to Read</string>
+    <string name="about">About</string>
+    <!--    <string name="abouttext">-->
+    <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis lacus sed diam pulvinar sagittis. Integer imperdiet quam odio, eget dapibus magna blandit non. Praesent egestas dui id ex tempor pellentesque. Nulla consequat sagittis pulvinar. Aliquam et dolor tellus. In nec placerat mauris. Mauris lobortis bibendum dui, id aliquet diam auctor nec. Curabitur luctus mi nec vestibulum ullamcorper.-->
+    <!--Proin nulla diam, semper id ultrices at, sollicitudin a mauris. Phasellus nec elit non dui finibus mollis. Fusce eu lorem ac augue ornare consectetur eu vitae orci. Fusce justo tellus, faucibus eu cursus ut, laoreet id nunc. Sed enim mauris, malesuada id nisi a, auctor ultricies augue. Pellentesque imperdiet purus tempor tortor dapibus, eu volutpat mauris volutpat. Donec mauris massa, pretium a massa et, fermentum lobortis risus. Quisque rhoncus ex eu pellentesque vestibulum. Pellentesque ultrices tincidunt tellus, id aliquet dolor tincidunt at. Nulla nec libero quis turpis pharetra rhoncus. In pretium augue eu vestibulum laoreet. Mauris pulvinar mi augue, in luctus mauris bibendum a. Sed a nibh et orci pretium rutrum. Aenean aliquet eu dui ac dapibus. Mauris aliquet, lectus pharetra vulputate bibendum, turpis risus condimentum mauris, accumsan porta elit odio ut nulla.-->
+    <!--    </string>-->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="profile">Profile</string>
+    <string name="bookDetail">Book Detail</string>
+    <string name="search">Search</string>
+    <string name="menu_label_1">Home</string>
+    <string name="menu_label_2">About</string>
+    <string name="menu_label_3">Feedback</string>
+    <string name="menu_label_4">Search</string>
+    <string name="menu_label_5">Profile</string>
+    <dimen name="bottom_navigation_icon_size" tools:override="true">52dp</dimen>
+
+
+    <!-- About Us -->
+    <string name="aboutUsToDoTitle">
+        <b>A few things you can do:</b>
+    </string>
+    <string name="aboutUsToDoContent">
+        - Search for your favourite books\n
+        - Choose your favourite genre(s) of books\n
+        - Find out if a book is a good read for you
+        <!--        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
+    </string>
+    <string name="aboutUsMsgTitle">
+        <b>A message from our co-founder:</b>
+    </string>
+    <string name="aboutUsMsgContent">
+         Booky Boi is an application designed with the purpose of allowing readers to find and read their favourite books hassle-free. It has several functions that enhances the user\'s experience.
+        <!--        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
+    </string>
+
+    <!-- Book Detail -->
+    <string name="bookDetailImg"></string>
+    <string name="bookDetailTitle">Creative Business Startup</string>
+    <string name="bookDetailAuthor">by Jen Brazel</string>
+    <string name="bookDetailRatings">31,322 ratings</string>
+    <string name="bookDetailReviews">2,144 reviews</string>
+    <string name="bookDetailReviewBtn">Review</string>
+
+    <!-- Profile -->
+    <string name="profileAvatar"></string>
+    <string name="profileName">(Username)</string>
+    <string name="profileEmail">(Email)</string>
+    <string name="profileBirthday">(Birthday)</string>
+    <string name="profileGenre">(Favourite Genres)</string>
+    <string name="profileLogOutBtn">Log Out</string>
+
+    <!-- Register -->
+    <string name="registerAvatar"></string>
+    <string name="registerUsername">Username:</string>
+    <string name="registerPassword">Password:</string>
+    <string name="registerEmail">Email:</string>
+    <string name="registerBirthday">Birthday:</string>
+    <string name="registerGenre">Favourite Genre(s):</string>
+    <string name="registerAdventureCB">Adventure</string>
+    <string name="registerCrimeCB">Crime</string>
+    <string name="registerHorrorCB">Horror</string>
+    <string name="registerMysteryCB">Mystery</string>
+    <string name="registerRomanceCB">Romance</string>
+    <string name="registerSciFiCB">Sci-Fi</string>
+    <string name="registerRegisterBtn">Register</string>
+    <string name="registerCancelBtn">Cancel</string>
+
+    <!-- Search -->
+    <string name="searchBar">Search for...</string>
+    <string name="topRead">Most Read Book:</string>
+    <string name="topReadBtn">Read Now</string>
+    <string name="topReadTitle">Creative\nBusiness\nStartup</string>
+    <string name="topReadAuthor">Jen Brazel</string>
+    <string name="othersRead">Others also liked:</string>
 </resources>
