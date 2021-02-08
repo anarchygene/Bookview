@@ -44,12 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         user = (User)getIntent().getSerializableExtra("userInfo");
         booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
-        if(user == null || booklist == null) {
-            System.out.println("User is empty");
-        } else {
-            System.out.println("User: " + user);
-            System.out.println("Booklist: " + booklist);
-        }
 
         //Date picker
         etDate = findViewById(R.id.registerBirthdayInput);
@@ -168,7 +162,6 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
     }
-
 
 
 }

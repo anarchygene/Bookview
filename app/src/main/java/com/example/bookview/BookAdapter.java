@@ -6,28 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Registry;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 
 public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
-
-    ArrayList<Book> data;
+    User user;
+    ArrayList<Book> booklist, data;
     Activity homeActivity;
 
-    public BookAdapter(Activity activity, ArrayList<Book> books){
-        data = books;
-        homeActivity = activity;
+    public BookAdapter(Activity activity, ArrayList<Book> books, ArrayList<Book> allBooks, User user){
+        this.data = books;
+        this.homeActivity = activity;
+        this.booklist = allBooks;
+        this.user = user;
     }
 
     @NonNull
@@ -42,14 +44,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         final Book b = data.get(position);
         holder.bookTitle.setText(b.getTitle());
-
-        String url = "gs://ande-da9e7.appspot.com/" + b.getImageURI().toString() + ".png";
-        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(url);
-
-        Glide.with(homeActivity)
-                .load(ref)
-                .into(holder.bookImage);
-
+        Picasso.get().load(b.getImageURI()).into(holder.bookImage);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +55,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     }
 
     private void openBookDetails(Book b) {
+
         // Open books details and pass book data to BookDetailsActivity
-        Intent intent = new Intent(homeActivity, BookDetailsActivity.class);
-        intent.putExtra("Book", b);
-        homeActivity.startActivity(intent);
+        Intent i = new Intent(homeActivity, BookDetailsActivity.class);
+        if(user == null || booklist == null) {
+            System.out.println("User is empty");
+        } else {
+            System.out.println("User: " + user);
+            System.out.println("Booklist: " + booklist);
+        }
+        i.putExtra("userInfo", user);
+        i.putExtra("bookInfo", (Serializable)booklist);
+        i.putExtra("Book", b);
+        homeActivity.startActivity(i);
 
     }
 

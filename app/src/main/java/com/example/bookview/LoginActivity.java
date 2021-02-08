@@ -4,10 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +18,6 @@ import com.google.firebase.database.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     DatabaseReference reference, bookreference;
@@ -38,12 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
         user = (User)getIntent().getSerializableExtra("userInfo");
         booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
-        if(user == null || booklist == null) {
-            System.out.println("User is empty");
-        } else {
-            System.out.println("User: " + user);
-            System.out.println("Booklist: " + booklist);
-        }
 
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
@@ -103,8 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 String author = childsnapshot.child("author").getValue(String.class);
                                                 String imageURI = childsnapshot.child("imageURI").getValue(String.class);
                                                 String title = childsnapshot.child("title").getValue(String.class);
+                                                String category = childsnapshot.child("category").getValue(String.class);
                                                 int ratingNo = childsnapshot.child("ratingNo").getValue(int.class);
-                                                booklist.add(new Book(title, imageURI, author, ratingNo));
+                                                booklist.add(new Book(title, imageURI, author, category, ratingNo));
                                             }
                                             System.out.println(booklist);
                                             Intent i = (new Intent(LoginActivity.this, MainActivity.class));
@@ -136,4 +127,5 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
+
 }

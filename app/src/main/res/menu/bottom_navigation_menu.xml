@@ -9,9 +9,11 @@
         android:title="@string/menu_label_2"
         android:icon="@drawable/aboutusicon" />
     <item android:id="@+id/action_feedback"
+        android:onClick="onClick"
         android:title="@string/menu_label_3"
         android:icon="@drawable/feedbackicon" />
     <item android:id="@+id/action_search"
+        android:onClick="onClick"
         android:title="@string/menu_label_4"
         android:icon="@drawable/searchicon" />
     <item android:id="@+id/action_profile"

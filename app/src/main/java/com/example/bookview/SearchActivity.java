@@ -1,29 +1,30 @@
 package com.example.bookview;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AboutUsActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     public User user;
     public ArrayList<Book> booklist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_search);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationView.getMenu().findItem(R.id.action_about).setChecked(true);
+        bottomNavigationView.getMenu().findItem(R.id.action_search).setChecked(true);
 
         user = (User)getIntent().getSerializableExtra("userInfo");
-        booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
+        booklist = (ArrayList<Book>) getIntent().getSerializableExtra("bookInfo");
     }
 
     public void onClick(MenuItem item) {
@@ -61,5 +62,4 @@ public class AboutUsActivity extends AppCompatActivity {
                 break;
         }
     }
-
 }

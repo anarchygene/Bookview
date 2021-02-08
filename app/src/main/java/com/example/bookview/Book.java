@@ -3,16 +3,17 @@ package com.example.bookview;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-    public String title, imageURI, author;
+    public String title, imageURI, author, category;
     public int ratingNo;
 
     public Book() {
     }
 
-    public Book(String title, String imageURI, String author, int ratingNo) {
+    public Book(String title, String imageURI, String author, String category, int ratingNo) {
         this.title = title;
         this.imageURI = imageURI;
         this.author = author;
+        this.category = category;
         this.ratingNo = ratingNo;
     }
 
@@ -40,6 +41,14 @@ public class Book implements Serializable {
         this.author = author;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public int getRatingNo() {
         return ratingNo;
     }
@@ -47,4 +56,5 @@ public class Book implements Serializable {
     public void setRatingNo(int ratingNo) {
         this.ratingNo = ratingNo;
     }
+
 }

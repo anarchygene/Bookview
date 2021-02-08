@@ -9,20 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookView">
-        <activity android:name=".AboutUsActivity"></activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".BookDetailsActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/search"></activity>
+        <activity
+            android:name=".FeedbackActivity"
+            android:label="@string/feedback"></activity>
+        <activity android:name=".ReviewActivity" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:label="@string/about" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/profile" />
+        <activity
+            android:name=".BookDetailsActivity"
+            android:label="@string/bookDetail" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/login" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/register" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookAdapter" />
     </application>
 
 </manifest>

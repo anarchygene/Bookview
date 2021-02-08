@@ -12,6 +12,7 @@
     <string name="profile">Profile</string>
     <string name="bookDetail">Book Detail</string>
     <string name="search">Search</string>
+    <string name="feedback">Feedback</string>
     <string name="menu_label_1">Home</string>
     <string name="menu_label_2">About</string>
     <string name="menu_label_3">Feedback</string>
@@ -43,7 +44,7 @@
     <string name="bookDetailTitle">Creative Business Startup</string>
     <string name="bookDetailAuthor">by Jen Brazel</string>
     <string name="bookDetailRatings">31,322 ratings</string>
-    <string name="bookDetailReviews">2,144 reviews</string>
+    <string name="bookDetailReviews">0 reviews</string>
     <string name="bookDetailReviewBtn">Review</string>
 
     <!-- Profile -->

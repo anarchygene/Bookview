@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 public class BookViewHolder extends RecyclerView.ViewHolder {
     CardView cardView;
     TextView bookTitle;

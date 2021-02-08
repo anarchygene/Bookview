@@ -1,69 +1,63 @@
 package com.example.bookview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button registerBtn, loginBtn, homeBtn;
+    BottomNavigationView bottomNavigationView;
     public User user;
-    public ArrayList<Book> booklist;
+    public ArrayList<Book> booklist, nfbooklist, fbooklist;
+    RecyclerView nf_recyclerView, f_recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.getMenu().findItem(R.id.action_home).setChecked(true);
 
         user = (User)getIntent().getSerializableExtra("userInfo");
-        booklist = (ArrayList<Book>)getIntent().getSerializableExtra("bookInfo");
-        if(user == null || booklist == null) {
-            System.out.println("User is empty");
-        } else {
-            System.out.println("User: " + user);
-            System.out.println("Booklist: " + booklist);
+        booklist = (ArrayList<Book>) getIntent().getSerializableExtra("bookInfo");
+        fbooklist = new ArrayList<Book>();
+        nfbooklist = new ArrayList<Book>();
+
+        nf_recyclerView = findViewById(R.id.nonfiction_recyclerview);
+        f_recyclerView = findViewById(R.id.fiction_recyclerview);
+
+        if (booklist != null) {
+            for (int i = 0; i < booklist.size(); i++) {
+                if(booklist.get(i).getCategory().equals("F")) {
+                    fbooklist.add(booklist.get(i));
+                } else{
+                    nfbooklist.add(booklist.get(i));
+                }
+            }
+            loadRecyclerView(nf_recyclerView, nfbooklist);
+            loadRecyclerView(f_recyclerView, fbooklist);
         }
 
+    }
 
-        registerBtn = findViewById(R.id.button);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RegisterActivity.class);
-                i.putExtra("userInfo", user);
-                i.putExtra("bookInfo", (Serializable)booklist);
-                startActivity(i);
-            }
-        });
-
-        loginBtn = findViewById(R.id.button2);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                i.putExtra("userInfo", user);
-                i.putExtra("bookInfo", (Serializable)booklist);
-                startActivity(i);
-            }
-        });
-
-        homeBtn = findViewById(R.id.button3);
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                i.putExtra("userInfo", user);
-                i.putExtra("bookInfo", (Serializable)booklist);
-                startActivity(i);
-            }
-        });
+    private void loadRecyclerView(RecyclerView recyclerView, ArrayList<Book> list) {
+        //Set recycler view to display wallets
+        BookAdapter adapter = new BookAdapter(this, list, booklist, user);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(HorizontalLayout);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     public void onClick(MenuItem item) {
@@ -81,14 +75,18 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("bookInfo", (Serializable)booklist);
                 startActivity(i);
                 break;
-////            case R.id.action_feedback:
-////                i = new Intent(this, Feedback.class);
-////                startActivity(i);
-////                break;
-//            case R.id.action_search:
-//                i = new Intent(this, Search.class);
-//                startActivity(i);
-//                break;
+            case R.id.action_feedback:
+                i = new Intent(this, FeedbackActivity.class);
+                i.putExtra("userInfo", user);
+                i.putExtra("bookInfo", (Serializable)booklist);
+                startActivity(i);
+                break;
+            case R.id.action_search:
+                i = new Intent(this, SearchActivity.class);
+                i.putExtra("userInfo", user);
+                i.putExtra("bookInfo", (Serializable)booklist);
+                startActivity(i);
+                break;
             case R.id.action_profile:
                 i = new Intent(this, ProfileActivity.class);
                 i.putExtra("userInfo", user);
