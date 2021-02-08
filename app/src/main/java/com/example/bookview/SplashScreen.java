@@ -24,7 +24,6 @@ public class SplashScreen extends AppCompatActivity {
                     e.printStackTrace();
                 } finally
                 {
-                    auth.signOut();
                     System.out.println(auth.getCurrentUser());
                     if(auth.getCurrentUser() != null) {
                         // Launch the MainActivity class if the user is already logged in
